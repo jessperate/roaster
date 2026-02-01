@@ -2,6 +2,7 @@
 
 import { RoastResult as RoastResultType } from '@/lib/types';
 import ScoreCard from './ScoreCard';
+import ShareButton from './ShareButton';
 
 interface RoastResultProps {
   result: RoastResultType;
@@ -117,8 +118,9 @@ export default function RoastResult({ result }: RoastResultProps) {
         </div>
       )}
 
-      {/* Share/Restart */}
-      <div className="text-center pt-4">
+      {/* Share */}
+      <div className="text-center pt-4 space-y-4">
+        <ShareButton result={result} />
         <p className="text-gray-500 text-sm">
           Think your content got unfairly roasted? Fix it and try again! 🔥
         </p>
