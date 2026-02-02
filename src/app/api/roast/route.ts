@@ -51,6 +51,12 @@ export async function POST(request: NextRequest) {
       throw new Error('Failed to parse roast response');
     }
 
+    // Add original content and source URL to the result
+    roastResult.originalContent = content;
+    if (body.url) {
+      roastResult.sourceUrl = body.url;
+    }
+
     return NextResponse.json(roastResult);
   } catch (error) {
     console.error('Roast API error:', error);

@@ -22,6 +22,8 @@ export interface RoastResult {
   roast: string;
   callouts: Callout[];
   improvements: string[];
+  originalContent?: string;
+  sourceUrl?: string;
 }
 
 export interface FetchUrlResponse {

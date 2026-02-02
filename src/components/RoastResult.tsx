@@ -3,6 +3,7 @@
 import { RoastResult as RoastResultType } from '@/lib/types';
 import ScoreCard from './ScoreCard';
 import ShareButton from './ShareButton';
+import CollapsibleContent from './CollapsibleContent';
 
 interface RoastResultProps {
   result: RoastResultType;
@@ -116,6 +117,14 @@ export default function RoastResult({ result }: RoastResultProps) {
             ))}
           </ul>
         </div>
+      )}
+
+      {/* Original Content */}
+      {result.originalContent && (
+        <CollapsibleContent
+          content={result.originalContent}
+          sourceUrl={result.sourceUrl}
+        />
       )}
 
       {/* Share */}
