@@ -43,45 +43,45 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50">
+    <main className="min-h-screen bg-ao-off-white">
       {/* Header */}
-      <header className="pt-8 pb-4 px-4">
+      <header className="pt-10 pb-6 px-4 border-b border-ao-stroke">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600 mb-3">
+          <div className="inline-block mb-4 px-3 py-1 bg-ao-label-yellow font-mono text-xs font-medium tracking-widest uppercase text-ao-near-black">
+            E-E-A-T Analysis
+          </div>
+          <h1 className="font-serif text-5xl md:text-6xl text-ao-near-black mb-3" style={{ letterSpacing: '-0.02em', lineHeight: 1.0 }}>
             Content Roaster
           </h1>
-          <p className="text-xl text-gray-600 font-medium">
+          <p className="text-lg text-ao-text-secondary font-sans">
             Is your content premium grade or pure slop? 🔥
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            E-E-A-T analysis with brutal honesty
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto px-4 py-10">
         {!result && !isLoading && (
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+          <div className="bg-ao-white border border-ao-stroke p-6 md:p-8">
             <ContentInput onSubmit={handleSubmit} isLoading={isLoading} />
           </div>
         )}
 
         {isLoading && (
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+          <div className="bg-ao-white border border-ao-stroke p-6 md:p-8">
             <LoadingRoast />
           </div>
         )}
 
         {error && (
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+          <div className="bg-ao-white border border-ao-stroke p-6 md:p-8">
             <div className="text-center py-8">
               <div className="text-6xl mb-4">😵</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops!</h2>
+              <h2 className="text-2xl font-bold text-ao-near-black mb-2">Oops!</h2>
               <p className="text-red-600 mb-6">{error}</p>
               <button
                 onClick={handleReset}
-                className="px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors"
+                className="px-6 py-3 bg-ao-near-black text-white font-semibold hover:bg-ao-forest transition-colors"
               >
                 Try Again
               </button>
@@ -95,9 +95,9 @@ export default function Home() {
             <div className="text-center">
               <button
                 onClick={handleReset}
-                className="px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl font-bold text-lg hover:from-gray-900 hover:to-black transition-all shadow-lg hover:shadow-xl"
+                className="px-8 py-4 bg-ao-near-black text-white font-bold text-lg hover:bg-ao-forest transition-colors"
               >
-                🔄 Roast Something Else
+                Roast something else
               </button>
             </div>
           </div>
@@ -105,14 +105,14 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="py-8 px-4 text-center text-gray-500 text-sm">
+      <footer className="py-8 px-4 text-center text-ao-text-secondary text-sm border-t border-ao-stroke">
         <p>
-          Built with 🔥 and Claude AI •{' '}
+          Built with 🔥 and Claude AI &nbsp;·&nbsp;{' '}
           <a
             href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline hover:text-orange-500"
+            className="underline hover:text-ao-mid-green transition-colors"
           >
             Learn about E-E-A-T
           </a>

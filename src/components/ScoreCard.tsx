@@ -8,52 +8,49 @@ interface ScoreCardProps {
   score: EEATScore;
 }
 
-function getGradeColor(grade: string): string {
+function getGradeBadgeStyle(grade: string): { bg: string; text: string } {
   const letter = grade.charAt(0).toUpperCase();
   switch (letter) {
-    case 'A':
-      return 'bg-green-500';
-    case 'B':
-      return 'bg-blue-500';
-    case 'C':
-      return 'bg-yellow-500';
-    case 'D':
-      return 'bg-orange-500';
-    case 'F':
-      return 'bg-red-500';
-    default:
-      return 'bg-gray-500';
+    case 'A': return { bg: '#008c44', text: '#ffffff' };
+    case 'B': return { bg: '#CCFFE0', text: '#000d05' };
+    case 'C': return { bg: '#EEFF8C', text: '#000d05' };
+    case 'D': return { bg: '#dfeae3', text: '#676c79' };
+    case 'F': return { bg: '#000d05', text: '#00ff64' };
+    default:  return { bg: '#dfeae3', text: '#000d05' };
   }
 }
 
 function getGradeBorderColor(grade: string): string {
   const letter = grade.charAt(0).toUpperCase();
   switch (letter) {
-    case 'A':
-      return 'border-green-500';
-    case 'B':
-      return 'border-blue-500';
-    case 'C':
-      return 'border-yellow-500';
-    case 'D':
-      return 'border-orange-500';
-    case 'F':
-      return 'border-red-500';
-    default:
-      return 'border-gray-500';
+    case 'A': return '#008c44';
+    case 'B': return '#CCFFE0';
+    case 'C': return '#EEFF8C';
+    case 'D': return '#dfeae3';
+    case 'F': return '#000d05';
+    default:  return '#d4e8da';
   }
 }
 
 export default function ScoreCard({ title, description, score }: ScoreCardProps) {
+  const badge = getGradeBadgeStyle(score.grade);
+  const borderColor = getGradeBorderColor(score.grade);
+
   return (
-    <div className={`bg-white rounded-xl p-5 shadow-md border-l-4 ${getGradeBorderColor(score.grade)} hover:shadow-lg transition-shadow`}>
+    <div
+      className="bg-ao-white p-5 border-l-4"
+      style={{ borderColor, borderTop: '1px solid #d4e8da', borderRight: '1px solid #d4e8da', borderBottom: '1px solid #d4e8da' }}
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
-          <h3 className="font-bold text-gray-900 text-lg">{title}</h3>
-          <p className="text-xs text-gray-500 mb-2">{description}</p>
-          <p className="text-gray-700 text-sm">{score.comment}</p>
+          <h3 className="font-bold text-ao-near-black text-base">{title}</h3>
+          <p className="font-mono text-xs text-ao-text-tertiary uppercase tracking-widest mb-2">{description}</p>
+          <p className="text-ao-text-secondary text-sm">{score.comment}</p>
         </div>
-        <div className={`${getGradeColor(score.grade)} text-white font-bold text-2xl w-14 h-14 rounded-lg flex items-center justify-center shrink-0 shadow-md`}>
+        <div
+          className="font-bold text-2xl w-14 h-14 flex items-center justify-center shrink-0 font-mono"
+          style={{ background: badge.bg, color: badge.text }}
+        >
           {score.grade}
         </div>
       </div>

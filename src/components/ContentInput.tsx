@@ -64,20 +64,20 @@ export default function ContentInput({ onSubmit, isLoading }: ContentInputProps)
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Mode Tabs */}
-      <div className="flex gap-2 p-1 bg-gray-100 rounded-xl">
+      <div className="flex border border-ao-stroke">
         <button
           type="button"
           onClick={() => {
             setMode('paste');
             setFetchError(null);
           }}
-          className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+          className={`flex-1 py-3 px-4 font-medium text-sm transition-colors font-mono uppercase tracking-widest ${
             mode === 'paste'
-              ? 'bg-white text-gray-900 shadow-md'
-              : 'text-gray-600 hover:text-gray-900'
+              ? 'bg-ao-near-black text-white'
+              : 'bg-ao-off-white text-ao-text-secondary hover:text-ao-near-black'
           }`}
         >
-          📝 Paste Text
+          Paste Text
         </button>
         <button
           type="button"
@@ -85,13 +85,13 @@ export default function ContentInput({ onSubmit, isLoading }: ContentInputProps)
             setMode('url');
             setFetchError(null);
           }}
-          className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+          className={`flex-1 py-3 px-4 font-medium text-sm transition-colors font-mono uppercase tracking-widest border-l border-ao-stroke ${
             mode === 'url'
-              ? 'bg-white text-gray-900 shadow-md'
-              : 'text-gray-600 hover:text-gray-900'
+              ? 'bg-ao-near-black text-white'
+              : 'bg-ao-off-white text-ao-text-secondary hover:text-ao-near-black'
           }`}
         >
-          🔗 Enter URL
+          Enter URL
         </button>
       </div>
 
@@ -102,14 +102,14 @@ export default function ContentInput({ onSubmit, isLoading }: ContentInputProps)
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Paste your article, blog post, or marketing content here... We'll roast it with love (and brutal honesty)."
-            className="w-full h-64 p-4 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all resize-none text-gray-800 placeholder-gray-400"
+            className="w-full h-64 p-4 border border-ao-stroke focus:border-ao-mid-green focus:outline-none transition-colors resize-none text-ao-text-primary placeholder-ao-text-tertiary bg-ao-white"
             disabled={isLoading}
           />
-          <div className="flex justify-between text-sm">
-            <span className={`${isValidLength ? 'text-green-600' : 'text-gray-500'}`}>
+          <div className="flex justify-between text-sm font-mono">
+            <span className={`${isValidLength ? 'text-ao-mid-green' : 'text-ao-text-tertiary'}`}>
               {characterCount} characters {!isValidLength && '(minimum 100)'}
             </span>
-            <span className="text-gray-400">
+            <span className="text-ao-text-tertiary">
               {characterCount > 15000 ? 'Content will be trimmed to 15,000 characters' : ''}
             </span>
           </div>
@@ -121,10 +121,10 @@ export default function ContentInput({ onSubmit, isLoading }: ContentInputProps)
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://example.com/your-article"
-            className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all text-gray-800 placeholder-gray-400"
+            className="w-full p-4 border border-ao-stroke focus:border-ao-mid-green focus:outline-none transition-colors text-ao-text-primary placeholder-ao-text-tertiary bg-ao-white"
             disabled={isLoading || isFetching}
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-ao-text-secondary">
             We&apos;ll fetch and extract the main content from this URL
           </p>
         </div>
@@ -132,7 +132,7 @@ export default function ContentInput({ onSubmit, isLoading }: ContentInputProps)
 
       {/* Error Message */}
       {fetchError && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700">
+        <div className="p-4 border border-red-200 bg-red-50 text-red-700 text-sm">
           ⚠️ {fetchError}
         </div>
       )}
@@ -141,10 +141,10 @@ export default function ContentInput({ onSubmit, isLoading }: ContentInputProps)
       <button
         type="submit"
         disabled={isLoading || isFetching || (mode === 'paste' && !isValidLength)}
-        className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all ${
+        className={`w-full py-4 px-6 font-bold text-base transition-colors ${
           isLoading || isFetching || (mode === 'paste' && !isValidLength)
-            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            : 'bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
+            ? 'bg-ao-green-100 text-ao-text-tertiary cursor-not-allowed'
+            : 'bg-ao-near-black text-white hover:bg-ao-forest'
         }`}
       >
         {isLoading || isFetching ? (
@@ -168,7 +168,7 @@ export default function ContentInput({ onSubmit, isLoading }: ContentInputProps)
             {isFetching ? 'Fetching content...' : 'Roasting...'}
           </span>
         ) : (
-          '🔥 Roast My Content'
+          '🔥 Roast my content'
         )}
       </button>
     </form>

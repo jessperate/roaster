@@ -3,13 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ao-near-black: #000d05;
+  --ao-forest: #002910;
+  --ao-mid-green: #008c44;
+  --ao-interaction: #00ff64;
+  --ao-super-light: #CCFFE0;
+  --ao-green-100: #dfeae3;
+  --ao-off-white: #F8FFFA;
+  --ao-white: #ffffff;
+  --ao-label-yellow: #EEFF8C;
+  --ao-stroke: #d4e8da;
+  --ao-text-primary: #09090b;
+  --ao-text-secondary: #676c79;
+  --ao-text-tertiary: #a5aab6;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--ao-text-primary);
+  background: var(--ao-off-white);
 }
 
 @layer utilities {

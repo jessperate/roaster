@@ -8,9 +8,27 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "Helvetica Neue", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "DM Mono", "monospace"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        ao: {
+          "near-black": "#000d05",
+          forest: "#002910",
+          "mid-green": "#008c44",
+          interaction: "#00ff64",
+          "super-light": "#CCFFE0",
+          "green-100": "#dfeae3",
+          "off-white": "#F8FFFA",
+          white: "#ffffff",
+          "label-yellow": "#EEFF8C",
+          stroke: "#d4e8da",
+          "text-primary": "#09090b",
+          "text-secondary": "#676c79",
+          "text-tertiary": "#a5aab6",
+        },
       },
     },
   },

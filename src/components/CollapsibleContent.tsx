@@ -11,22 +11,23 @@ export default function CollapsibleContent({ content, sourceUrl }: CollapsibleCo
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
+    <div className="bg-ao-white border border-ao-stroke overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-100 transition-colors"
+        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-ao-off-white transition-colors"
       >
-        <div className="flex items-center gap-2">
-          <span className="text-lg">📄</span>
-          <span className="font-semibold text-gray-700">Original Content</span>
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs uppercase tracking-widest text-ao-text-secondary font-medium">
+            Original Content
+          </span>
           {sourceUrl && (
-            <span className="text-xs text-gray-500 truncate max-w-[200px]">
-              ({new URL(sourceUrl).hostname})
+            <span className="font-mono text-xs text-ao-text-tertiary truncate max-w-[200px]">
+              {new URL(sourceUrl).hostname}
             </span>
           )}
         </div>
         <svg
-          className={`w-5 h-5 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-ao-text-secondary transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -36,13 +37,13 @@ export default function CollapsibleContent({ content, sourceUrl }: CollapsibleCo
       </button>
 
       {isOpen && (
-        <div className="px-5 pb-5 border-t border-gray-200">
+        <div className="px-5 pb-5 border-t border-ao-stroke">
           {sourceUrl && (
             <a
               href={sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-orange-600 hover:text-orange-700 mt-3 mb-2"
+              className="inline-flex items-center gap-1 text-sm text-ao-mid-green hover:text-ao-forest mt-3 mb-2 transition-colors"
             >
               <span>View original source</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,12 +52,12 @@ export default function CollapsibleContent({ content, sourceUrl }: CollapsibleCo
             </a>
           )}
           <div className="mt-3 max-h-96 overflow-y-auto">
-            <p className="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">
+            <p className="text-sm text-ao-text-secondary whitespace-pre-wrap leading-relaxed">
               {content}
             </p>
           </div>
-          <div className="mt-3 pt-3 border-t border-gray-100">
-            <p className="text-xs text-gray-400">
+          <div className="mt-3 pt-3 border-t border-ao-stroke">
+            <p className="font-mono text-xs text-ao-text-tertiary">
               {content.length.toLocaleString()} characters
             </p>
           </div>

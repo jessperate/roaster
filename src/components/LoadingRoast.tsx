@@ -31,16 +31,16 @@ export default function LoadingRoast() {
   return (
     <div className="flex flex-col items-center justify-center py-16 space-y-6">
       <div className="relative">
-        <div className="w-20 h-20 border-4 border-orange-200 rounded-full animate-spin border-t-orange-500"></div>
+        <div className="w-16 h-16 border-2 border-ao-stroke animate-spin border-t-ao-mid-green"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-3xl">🔥</span>
+          <span className="text-2xl">🔥</span>
         </div>
       </div>
-      <p className="text-xl font-medium text-gray-700 animate-pulse">
+      <p className="text-base font-medium text-ao-text-primary animate-pulse">
         {loadingMessages[messageIndex]}
       </p>
-      <p className="text-sm text-gray-500">
-        This usually takes 10-15 seconds
+      <p className="font-mono text-xs text-ao-text-tertiary uppercase tracking-widest">
+        Usually takes 10–15 seconds
       </p>
     </div>
   );

@@ -2,15 +2,25 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
+const saansFont = localFont({
+  src: [
+    { path: "./fonts/Saans-Regular.ttf", weight: "400" },
+    { path: "./fonts/Saans-Medium.ttf", weight: "500" },
+    { path: "./fonts/Saans-Bold.ttf", weight: "700" },
+  ],
+  variable: "--font-sans",
+});
+
+const serrifFont = localFont({
+  src: "./fonts/SerrifVF.ttf",
+  variable: "--font-serif",
   weight: "100 900",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const saansMonoFont = localFont({
+  src: "./fonts/SaansMono-Medium.ttf",
+  variable: "--font-mono",
+  weight: "500",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
+        className={`${saansFont.variable} ${serrifFont.variable} ${saansMonoFont.variable} antialiased font-sans`}
       >
         {children}
       </body>
