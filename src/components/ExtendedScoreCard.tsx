@@ -1,7 +1,7 @@
 'use client';
 
 import { ExtendedScore } from '@/lib/types';
-import { ScoreMetadata } from '@/lib/scoreMetadata';
+import { ScoreMetadata, CTA_LABELS } from '@/lib/scoreMetadata';
 
 interface ExtendedScoreCardProps {
   score: ExtendedScore;
@@ -62,9 +62,20 @@ export default function ExtendedScoreCard({ score, metadata }: ExtendedScoreCard
       </div>
 
       {showGuidance && (
-        <div className="space-y-2 pt-2 border-t border-ao-stroke">
+        <div className="space-y-3 pt-2 border-t border-ao-stroke">
           <p className="text-xs text-ao-text-secondary leading-relaxed">{metadata.reasoning}</p>
           <p className="text-xs text-ao-mid-green font-medium leading-relaxed">→ {metadata.suggestion}</p>
+          <a
+            href={metadata.ctaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-4 py-2 text-xs font-semibold transition-colors"
+            style={{ background: '#000d05', color: '#00ff64' }}
+            onMouseEnter={e => (e.currentTarget.style.background = '#002910')}
+            onMouseLeave={e => (e.currentTarget.style.background = '#000d05')}
+          >
+            {CTA_LABELS[metadata.ctaType]} →
+          </a>
         </div>
       )}
     </div>
