@@ -1,7 +1,13 @@
 'use client';
 
 import { RoastResult as RoastResultType } from '@/lib/types';
+import {
+  SEO_AEO_METADATA,
+  INFORMATION_GAIN_METADATA,
+  STRUCTURE_READABILITY_METADATA,
+} from '@/lib/scoreMetadata';
 import ScoreCard from './ScoreCard';
+import ExtendedScoreCard from './ExtendedScoreCard';
 import ShareButton from './ShareButton';
 import CollapsibleContent from './CollapsibleContent';
 
@@ -27,6 +33,14 @@ function getVerdictStyle(verdict: string): { bg: string; text: string; score: st
   return { bg: '#000d05', text: '#ffffff', score: '#00ff64' };
 }
 
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-block px-3 py-1 bg-ao-label-yellow font-mono text-xs font-medium tracking-widest uppercase text-ao-near-black">
+      {children}
+    </span>
+  );
+}
+
 export default function RoastResult({ result }: RoastResultProps) {
   const verdictStyle = getVerdictStyle(result.verdict);
 
@@ -46,53 +60,61 @@ export default function RoastResult({ result }: RoastResultProps) {
 
       {/* E-E-A-T Scores */}
       <div>
-        <div className="flex items-center gap-3 mb-4">
-          <span className="inline-block px-3 py-1 bg-ao-label-yellow font-mono text-xs font-medium tracking-widest uppercase text-ao-near-black">
-            E-E-A-T Breakdown
-          </span>
-        </div>
+        <div className="mb-4"><SectionLabel>E-E-A-T Breakdown</SectionLabel></div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <ScoreCard
-            title="Experience"
-            description="First-hand, real-world experience"
-            score={result.scores.experience}
-          />
-          <ScoreCard
-            title="Expertise"
-            description="Deep subject knowledge"
-            score={result.scores.expertise}
-          />
-          <ScoreCard
-            title="Authoritativeness"
-            description="Credentials & citations"
-            score={result.scores.authoritativeness}
-          />
-          <ScoreCard
-            title="Trustworthiness"
-            description="Accuracy & transparency"
-            score={result.scores.trustworthiness}
-          />
+          <ScoreCard title="Experience" description="First-hand, real-world experience" score={result.scores.experience} />
+          <ScoreCard title="Expertise" description="Deep subject knowledge" score={result.scores.expertise} />
+          <ScoreCard title="Authoritativeness" description="Credentials & citations" score={result.scores.authoritativeness} />
+          <ScoreCard title="Trustworthiness" description="Accuracy & transparency" score={result.scores.trustworthiness} />
         </div>
       </div>
 
+      {/* SEO & AEO Discoverability */}
+      {result.seoAeoScores && (
+        <div>
+          <div className="mb-4"><SectionLabel>SEO & AEO Discoverability</SectionLabel></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <ExtendedScoreCard score={result.seoAeoScores.keywordDensity} metadata={SEO_AEO_METADATA.keywordDensity} />
+            <ExtendedScoreCard score={result.seoAeoScores.keywordInH2} metadata={SEO_AEO_METADATA.keywordInH2} />
+            <ExtendedScoreCard score={result.seoAeoScores.keywordInFirst100Words} metadata={SEO_AEO_METADATA.keywordInFirst100Words} />
+            <ExtendedScoreCard score={result.seoAeoScores.altText} metadata={SEO_AEO_METADATA.altText} />
+            <ExtendedScoreCard score={result.seoAeoScores.internalLinks} metadata={SEO_AEO_METADATA.internalLinks} />
+          </div>
+        </div>
+      )}
+
+      {/* Information Gain */}
+      {result.informationGainScores && (
+        <div>
+          <div className="mb-4"><SectionLabel>Information Gain</SectionLabel></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <ExtendedScoreCard score={result.informationGainScores.firstPartyInsights} metadata={INFORMATION_GAIN_METADATA.firstPartyInsights} />
+          </div>
+        </div>
+      )}
+
+      {/* Structure & Readability */}
+      {result.structureReadabilityScores && (
+        <div>
+          <div className="mb-4"><SectionLabel>Structure & Readability</SectionLabel></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <ExtendedScoreCard score={result.structureReadabilityScores.paragraphSentenceLength} metadata={STRUCTURE_READABILITY_METADATA.paragraphSentenceLength} />
+            <ExtendedScoreCard score={result.structureReadabilityScores.headingHierarchy} metadata={STRUCTURE_READABILITY_METADATA.headingHierarchy} />
+            <ExtendedScoreCard score={result.structureReadabilityScores.lists} metadata={STRUCTURE_READABILITY_METADATA.lists} />
+          </div>
+        </div>
+      )}
+
       {/* The Roast */}
       <div className="bg-ao-white border border-ao-stroke p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="inline-block px-3 py-1 bg-ao-label-yellow font-mono text-xs font-medium tracking-widest uppercase text-ao-near-black">
-            The Roast 🔥
-          </span>
-        </div>
+        <div className="mb-4"><SectionLabel>The Roast 🔥</SectionLabel></div>
         <p className="text-ao-text-primary whitespace-pre-wrap leading-relaxed">{result.roast}</p>
       </div>
 
       {/* Callouts */}
       {result.callouts.length > 0 && (
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="inline-block px-3 py-1 bg-ao-label-yellow font-mono text-xs font-medium tracking-widest uppercase text-ao-near-black">
-              Specific Callouts
-            </span>
-          </div>
+          <div className="mb-4"><SectionLabel>Specific Callouts</SectionLabel></div>
           <div className="space-y-3">
             {result.callouts.map((callout, index) => (
               <div key={index} className="bg-ao-white border border-ao-stroke p-4">
@@ -111,11 +133,7 @@ export default function RoastResult({ result }: RoastResultProps) {
       {/* Improvements */}
       {result.improvements.length > 0 && (
         <div className="border border-ao-stroke p-6" style={{ background: '#F8FFFA' }}>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="inline-block px-3 py-1 bg-ao-label-yellow font-mono text-xs font-medium tracking-widest uppercase text-ao-near-black">
-              How to fix this
-            </span>
-          </div>
+          <div className="mb-4"><SectionLabel>How to fix this</SectionLabel></div>
           <ul className="space-y-3">
             {result.improvements.map((improvement, index) => (
               <li key={index} className="flex items-start gap-3">

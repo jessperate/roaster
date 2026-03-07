@@ -10,6 +10,29 @@ export interface EEATScores {
   trustworthiness: EEATScore;
 }
 
+export interface ExtendedScore {
+  grade: string;
+  comment: string;
+}
+
+export interface SEOAEOScores {
+  keywordDensity: ExtendedScore;
+  keywordInH2: ExtendedScore;
+  keywordInFirst100Words: ExtendedScore;
+  altText: ExtendedScore;
+  internalLinks: ExtendedScore;
+}
+
+export interface InformationGainScores {
+  firstPartyInsights: ExtendedScore;
+}
+
+export interface StructureReadabilityScores {
+  paragraphSentenceLength: ExtendedScore;
+  headingHierarchy: ExtendedScore;
+  lists: ExtendedScore;
+}
+
 export interface Callout {
   quote: string;
   issue: string;
@@ -19,6 +42,9 @@ export interface RoastResult {
   verdict: string;
   overallScore: string;
   scores: EEATScores;
+  seoAeoScores: SEOAEOScores;
+  informationGainScores: InformationGainScores;
+  structureReadabilityScores: StructureReadabilityScores;
   roast: string;
   callouts: Callout[];
   improvements: string[];
